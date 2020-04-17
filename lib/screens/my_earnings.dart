@@ -21,54 +21,54 @@ class MyEarnings extends StatelessWidget{
       ),
       body: Column(
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.all(20.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.grey[200],
-            ),
-            child: Column(
-              children: <Widget>[
-                Container(
-                    margin: EdgeInsets.all(10.0),
-
-                    child: Text("Last 1 Month")),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.arrow_back_ios),
-                    ),
-                    Spacer(),
-                    Container(
+            Container(
+              margin: EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey[200],
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
                       margin: EdgeInsets.all(10.0),
-                        child: Text("\$15.4738.00",style: TextStyle(fontSize: 28),)
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.arrow_forward_ios),
-                    )
-                  ],
-                ),
-                Divider(),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
-                  child: Row(
+
+                      child: Text("Last 1 Month")),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Icon(Icons.directions_car),
-                      Text("200 Rides"),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.arrow_back_ios),
+                      ),
                       Spacer(),
-                      Icon(Icons.timer),
-                      Text("20d 19h"),
+                      Container(
+                        margin: EdgeInsets.all(10.0),
+                          child: Text("\$15.4738.00",style: TextStyle(fontSize: 28),)
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.arrow_forward_ios),
+                      )
                     ],
                   ),
-                ),
-              ],
+                  Divider(),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 10),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.directions_car),
+                        Text("200 Rides"),
+                        Spacer(),
+                        Icon(Icons.timer),
+                        Text("20d 19h"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
           Container(
             alignment: Alignment.bottomCenter,
               margin: EdgeInsets.all(20.0),

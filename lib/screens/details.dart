@@ -67,11 +67,10 @@ class _DetailsState extends State<Details> {
                 child: TabBarView(
                   children: <Widget>[
                     //Details Tab
-                    getDetailsTab(),
-                    getDocumentTab(),
+                    DetailsTab(),
+                    DocumentTab(),
                     //Note Tab
-                    getNotesTab(),
-
+                    NotesTab(),
                   ],
                 ),
               ),
@@ -86,7 +85,24 @@ class _DetailsState extends State<Details> {
     Navigator.pop(context);
   }
 
-  Widget getNotesTab() {
+  getBorderRadius() {
+    if (_currentIndex == 0) {
+      return BorderRadius.only(
+          bottomLeft: Radius.circular(25.0,),
+          topLeft: Radius.circular(25.0));
+    } else if (_currentIndex == 2) {
+      return BorderRadius.only(
+          bottomRight: Radius.circular(25.0
+          ),
+          topRight: Radius.circular(25.0));
+    }
+    return BorderRadius.circular(0.0);
+  }
+}
+
+class NotesTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
         Container(
@@ -137,22 +153,26 @@ class _DetailsState extends State<Details> {
             subtitle: Text("lorum ipsum gas aliquana boudsljsd"),
           ),
         ),
-             Container(
-               alignment: Alignment.bottomRight,
-               padding: EdgeInsets.only(right: 20),
-               child: FloatingActionButton(
-                child: Icon(Icons.add),
-                onPressed: (){},
-            ),
-             ),
+        Container(
+          alignment: Alignment.bottomRight,
+          padding: EdgeInsets.only(right: 20),
+          child: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: (){},
+          ),
+        ),
 
 
 
       ],
     );
   }
+}
 
-  Widget getDetailsTab() {
+
+class DetailsTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
         Container(
@@ -246,8 +266,12 @@ class _DetailsState extends State<Details> {
       ],
     );
   }
+}
 
-  Widget getDocumentTab() {
+
+class DocumentTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return GridView.count(
       primary: false,
       padding: const EdgeInsets.all(30),
@@ -391,20 +415,5 @@ class _DetailsState extends State<Details> {
 
       ],
     );
-
-  }
-
-  getBorderRadius() {
-    if (_currentIndex == 0) {
-      return BorderRadius.only(
-          bottomLeft: Radius.circular(25.0,),
-          topLeft: Radius.circular(25.0));
-    } else if (_currentIndex == 2) {
-      return BorderRadius.only(
-          bottomRight: Radius.circular(25.0
-          ),
-          topRight: Radius.circular(25.0));
-    }
-    return BorderRadius.circular(0.0);
   }
 }

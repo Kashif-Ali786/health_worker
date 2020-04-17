@@ -5,6 +5,7 @@ import 'package:flutterapp1/screens/timeline.dart';
 import 'package:flutterapp1/screens/details.dart';
 import 'dart:ui';
 import 'package:table_calendar/table_calendar.dart';
+import 'start_shift.dart';
 import 'my_earnings.dart';
 
 class Home extends StatefulWidget {
@@ -16,7 +17,6 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> {
   int _currentIndex = 0;
-  var _badgeTimeline = new BadgeTimeline();
 
   CalendarController _calendarController;
   Map<DateTime, List<dynamic>> _events;
@@ -65,61 +65,6 @@ class _Home extends State<Home> {
             ));
   }
 
-  Widget getListView() {
-    return Expanded(
-        child: ListView.builder(
-      itemCount: 1,
-      itemBuilder: (context, index) {
-        return Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 15.0, right: 15.0, bottom: 15.0),
-              child: ListTile(
-                  leading: Container(
-                      width: 70,
-                      alignment: Alignment.topLeft,
-                      child: Text("00:00 PM")),
-                  subtitle: Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: Colors.grey[200],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                "Trip to Lahore",
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.black),
-                              ),
-                              Text("From: Lahore"),
-                              Text("To: Karachi")
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return Details();
-                    }));
-                  }),
-            ),
-            Divider(),
-          ],
-        );
-      },
-    ));
-  }
 
   Widget getTableCalendar() {
     return TableCalendar(
@@ -202,7 +147,7 @@ class _Home extends State<Home> {
             child: Container(
               child: TabBarView(
                 children: <Widget>[
-                  getPastTab(),
+                  PastTab(),
                   getScheduleTab(),
                 ],
               ),
@@ -220,7 +165,7 @@ class _Home extends State<Home> {
     }
     else if (_currentIndex == 2)
     {
-      return getSettingTab();
+      return SettingTab();
     }
 //    else if(_currentIndex==1)
 //      {
@@ -241,86 +186,6 @@ class _Home extends State<Home> {
     );
   }
 
-  Widget getPastTab() {
-    return ListView.builder(
-      itemCount: 1,
-      itemBuilder: (context, index) {
-        return Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: 15),
-              child: ListTile(
-                leading: Container(
-                  height: 90,
-                  width: 65,
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage("assets/images/icons-lady.png"),
-                    backgroundColor: Theme.of(context).primaryColor,
-                  ),
-                ),
-                title: Text("Lorum Ipsum", style: TextStyle(fontSize: 24)),
-                subtitle: Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
-                                child: Text(
-                                  "Monday, 25 March -03:33pm",
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.black),
-                                ),
-                              ),
-                              Text("From: Lahore"),
-                              Text("To: Karachi"),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  color: Colors.grey[200],
-                                ),
-                                padding: EdgeInsets.all(3.0),
-                                child: Text(
-                                  "At the Clinic",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                trailing: Container(
-                  margin: EdgeInsets.only(top: 30),
-                  alignment: Alignment.center,
-                  width: 50,
-                  child: Container(
-                    width: 50,
-                    height: 70,
-                    child: Icon(Icons.done, color: Colors.white),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        shape: BoxShape.circle),
-                  ),
-                ),
-              ),
-            ),
-            Divider(),
-          ],
-        );
-      },
-    );
-  }
-
   Widget getScheduleTab() {
     return Center(
       child: Column(
@@ -336,7 +201,7 @@ class _Home extends State<Home> {
               style: TextStyle(fontSize: 18.0),
             ),
           ),
-          getListView(),
+          GetListView(),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Align(
@@ -352,8 +217,191 @@ class _Home extends State<Home> {
     );
   }
 
-  Widget getSettingTab() {
-    return Column(
+  Widget getBottomNavBar() {
+    return BottomNavigationBar(
+        backgroundColor: Colors.grey[200],
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              title: Text(
+                "Profile",
+              )),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_library),
+            title: Text("Task"),
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), title: Text("Setting"))
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+          if (_currentIndex == 1) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return BadgeTimeline();
+            }));
+          }
+        }
+        );
+  }
+}
+
+class PastTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: 1,
+      itemBuilder: (context, index) {
+        return Column(
+          children: <Widget>[
+            GestureDetector(
+              child: Container(
+                margin: EdgeInsets.only(top: 15),
+                child: ListTile(
+                  leading: Container(
+                    height: 90,
+                    width: 65,
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundImage: AssetImage("assets/images/icons-lady.png"),
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  title: Text("Lorum Ipsum", style: TextStyle(fontSize: 24)),
+                  subtitle: Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.symmetric(vertical: 5.0),
+                                  child: Text(
+                                    "Monday, 25 March -03:33pm",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.black),
+                                  ),
+                                ),
+                                Text("From: Lahore"),
+                                Text("To: Karachi"),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                    color: Colors.grey[200],
+                                  ),
+                                  padding: EdgeInsets.all(3.0),
+                                  child: Text(
+                                    "At the Clinic",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  trailing: Container(
+                    margin: EdgeInsets.only(top: 30),
+                    alignment: Alignment.center,
+                    width: 50,
+                    child: Container(
+                      width: 50,
+                      height: 70,
+                      child: Icon(Icons.done, color: Colors.white),
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          shape: BoxShape.circle),
+                    ),
+                  ),
+                ),
+              ),
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return ShiftStart();
+                }));
+                print("List Tapped");
+              },
+            ),
+            Divider(),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class GetListView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        child: ListView.builder(
+          itemCount: 1,
+          itemBuilder: (context, index) {
+            return Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: 15.0, right: 15.0, bottom: 15.0),
+                  child: ListTile(
+                      leading: Container(
+                          width: 70,
+                          alignment: Alignment.topLeft,
+                          child: Text("00:00 PM")),
+                      subtitle: Container(
+                        padding: EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: Colors.grey[200],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "Trip to Lahore",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                  ),
+                                  Text("From: Lahore"),
+                                  Text("To: Karachi")
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return Details();
+                            }));
+                      }),
+                ),
+                Divider(),
+              ],
+            );
+          },
+        ));
+  }
+}
+
+class SettingTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return  Column(
       children: <Widget>[
         Container(
           margin: EdgeInsets.all(30.0),
@@ -453,11 +501,11 @@ class _Home extends State<Home> {
               ),
               GestureDetector(
                 onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return MyEarnings();
-                        }
-                        )
-                    );
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return MyEarnings();
+                  }
+                  )
+                  );
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 180),
@@ -554,35 +602,7 @@ class _Home extends State<Home> {
       ],
     );
   }
-
-
-  Widget getBottomNavBar() {
-    return BottomNavigationBar(
-        backgroundColor: Colors.grey[200],
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              title: Text(
-                "Profile",
-              )),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_library),
-            title: Text("Task"),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), title: Text("Setting"))
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          if (_currentIndex == 1) {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return BadgeTimeline();
-            }));
-          }
-        }
-        );
-  }
 }
+
+
+

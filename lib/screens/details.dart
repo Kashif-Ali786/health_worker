@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp1/screens/schedule_update.dart';
 
 class Details extends StatefulWidget{
   @override
@@ -9,6 +10,7 @@ class Details extends StatefulWidget{
 
 }
 class _DetailsState extends State<Details> {
+  int _currentIndex=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +29,56 @@ class _DetailsState extends State<Details> {
           ],
         ),
       ),
-      body: getAllTabBars(),
+      body: DefaultTabController(
+        length: 3,
+        child: Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              constraints: BoxConstraints.expand(height: 60),
+              child: Container(
+                margin: EdgeInsets.only(left: 10,right: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25.0),
+                  color: Colors.grey[200],
+                ),
+                child: TabBar(
+                  indicator: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                    borderRadius: getBorderRadius(),
+                  ),
+                  unselectedLabelColor: Colors.black87,
+                  tabs: <Widget>[
+                    Text('Details',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
+                    Text('Document',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
+                    Text('Notes',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
+                  ],
+                  onTap: (index){
+                    setState(() {
+                      _currentIndex = index;
+                      print(_currentIndex);
+                    });
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: TabBarView(
+                  children: <Widget>[
+                    //Details Tab
+                    getDetailsTab(),
+                    getDocumentTab(),
+                    //Note Tab
+                    getNotesTab(),
+
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -183,56 +234,16 @@ class _DetailsState extends State<Details> {
         ),
         Container(
             margin: EdgeInsets.all( 30),
-            child: FloatingActionButton.extended(onPressed: (){}, label: Text('Track your trip'),))
+            child: FloatingActionButton.extended(
+              onPressed: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return Schedule();
+                    }));
+              },
+              label: Text('Track your trip'),))
 
       ],
-    );
-  }
-
-  Widget getAllTabBars() {
-    return DefaultTabController(
-      length: 3,
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            constraints: BoxConstraints.expand(height: 60),
-            child: Container(
-              margin: EdgeInsets.only(left: 10,right: 10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25.0),
-                color: Colors.black12,
-              ),
-              child: TabBar(
-                indicator: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(25.0),topLeft: Radius.circular(25.0))
-                ),
-                unselectedLabelColor: Colors.black87,
-                tabs: <Widget>[
-                  Text('Details',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
-                  Text('Document',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
-                  Text('Notes',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              child: TabBarView(
-                children: <Widget>[
-                  //Details Tab
-                  getDetailsTab(),
-                  getDocumentTab(),
-                  //Note Tab
-                   getNotesTab(),
-
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
     );
   }
 
@@ -381,5 +392,19 @@ class _DetailsState extends State<Details> {
       ],
     );
 
+  }
+
+  getBorderRadius() {
+    if (_currentIndex == 0) {
+      return BorderRadius.only(
+          bottomLeft: Radius.circular(25.0,),
+          topLeft: Radius.circular(25.0));
+    } else if (_currentIndex == 2) {
+      return BorderRadius.only(
+          bottomRight: Radius.circular(25.0
+          ),
+          topRight: Radius.circular(25.0));
+    }
+    return BorderRadius.circular(0.0);
   }
 }

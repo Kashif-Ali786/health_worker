@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import './home.dart';
-import 'timeline.dart';
+import 'screens/home.dart';
+import 'screens/timeline.dart';
 
 void main()=>runApp(MyApp());
 

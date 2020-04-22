@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp1/screens/welcom_back.dart';
 
 import 'lets_start.dart';
 

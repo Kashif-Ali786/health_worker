@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-
-import 'home.dart';
 class MyEarnings extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -11,13 +9,10 @@ class MyEarnings extends StatelessWidget{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-            child: Icon(Icons.arrow_back_ios),
-                onTap: (){
-
-                },
-        ),
-        title: Text("My Earnings",style: TextStyle(fontWeight: FontWeight.w400),),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        leading: Icon(Icons.arrow_back_ios),
+        title: Text("My Earnings"),
       ),
       body: Column(
         children: <Widget>[

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutterapp1/screens/timeline.dart';
 import 'package:flutterapp1/screens/details.dart';
+import 'package:intl/intl.dart';
 import 'dart:ui';
 import 'package:table_calendar/table_calendar.dart';
 import 'start_shift.dart';
@@ -163,10 +164,10 @@ class _Home extends State<Home> {
     {
       return getTabBarView();
     }
-    else if (_currentIndex == 2)
-    {
-      return SettingTab();
-    }
+//    else if (_currentIndex == 2)
+//    {
+//      return SettingTab();
+//    }
 //    else if(_currentIndex==1)
 //      {
 //        return BadgeTimeline();
@@ -243,12 +244,35 @@ class _Home extends State<Home> {
               return BadgeTimeline();
             }));
           }
+          else if (_currentIndex == 2) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return SettingTab();
+            }));
+          }
         }
         );
   }
 }
 
-class PastTab extends StatelessWidget {
+
+class PastTab extends StatefulWidget {
+  @override
+  _PastTabState createState() => _PastTabState();
+}
+
+class _PastTabState extends State<PastTab> {
+
+   DateTime _dateTime;
+ // String fomattedDate=DateFormat.yMMMd().format(_dateTime);
+  TimeOfDay _timeOfDay;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _dateTime=DateTime.now();
+    _timeOfDay=TimeOfDay.now();
+  }
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -284,7 +308,7 @@ class PastTab extends StatelessWidget {
                                   padding:
                                   const EdgeInsets.symmetric(vertical: 5.0),
                                   child: Text(
-                                    "Monday, 25 March -03:33pm",
+                                    "${_dateTime.year}, ${_dateTime.month}, ${_dateTime.day} - ${_timeOfDay.format(context).toUpperCase()}",
                                     style: TextStyle(
                                         fontSize: 16, color: Colors.black),
                                   ),
@@ -339,7 +363,18 @@ class PastTab extends StatelessWidget {
   }
 }
 
-class GetListView extends StatelessWidget {
+class GetListView extends StatefulWidget {
+  @override
+  _GetListViewState createState() => _GetListViewState();
+}
+
+class _GetListViewState extends State<GetListView> {
+
+  TimeOfDay timeOfDay;
+  void initState() {
+    super.initState();
+    timeOfDay=TimeOfDay(hour: 00,minute: 00);
+  }
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -354,7 +389,7 @@ class GetListView extends StatelessWidget {
                       leading: Container(
                           width: 70,
                           alignment: Alignment.topLeft,
-                          child: Text("00:00 PM")),
+                          child: Text("${timeOfDay.format(context).toUpperCase()}")),
                       subtitle: Container(
                         padding: EdgeInsets.all(10.0),
                         decoration: BoxDecoration(
@@ -398,208 +433,122 @@ class GetListView extends StatelessWidget {
   }
 }
 
+
 class SettingTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.all(30.0),
-          child: Row(
-            children: <Widget>[
-              Container(
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://dyl80ryjxr1ke.cloudfront.net/external_assets/hero_examples/hair_beach_v1785392215/original.jpeg'),
-                  radius: 50,
+    return  Scaffold(
+      appBar: AppBar(
+        leading: Icon(Icons.arrow_back_ios),
+        title: Text("Settings"),
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(left:20.0,bottom: 10.0,top: 20),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        'https://dyl80ryjxr1ke.cloudfront.net/external_assets/hero_examples/hair_beach_v1785392215/original.jpeg'),
+                    radius: 50,
+                  ),
                 ),
-              ),
-              Container(
-                height: 80,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-                      child: Text(
-                        "Lorum Ipsum",
-                        style: TextStyle(
-                          fontSize: 20,
+                Container(
+                  height: 80,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+                        child: Text(
+                          "Lorum Ipsum",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 1),
-                      child: Text("1234567"),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 0),
-                      child: Text("Lorumipusm@gmail.com"),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 1),
+                        child: Text("1234567"),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 0),
+                        child: Text("Lorumipusm@gmail.com"),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: <Widget>[
+                ListTile(
+                  leading:Icon(Icons.person_outline) ,
+                  title:Text("Edit Account", style: TextStyle(fontSize: 18),),
+                  trailing: Icon(Icons.keyboard_arrow_right) ,
+                ),
+                Divider(height: 0,),
+                ListTile(
+                  leading:Icon(Icons.lock_outline),
+                  title:Text("Change Password", style: TextStyle(fontSize: 18)),
+                  trailing: Icon(Icons.keyboard_arrow_right) ,
+                ),
+                Divider(height: 0,),
+                ListTile(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return MyEarnings();
+                    }
                     )
-                  ],
+                    );
+                  },
+                  leading:Icon(Icons.next_week),
+                  title:Text("My Earnings", style: TextStyle(fontSize: 18)
+                  ),
+                  trailing: Icon(Icons.keyboard_arrow_right) ,
                 ),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.symmetric(vertical:5.0),
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left:30,right: 12),
-                child: Icon(Icons.person_outline),
-              ),
-              Container(
-//                padding:const EdgeInsets.symmetric(horizontal: 15),
-//                margin: EdgeInsets.symmetric( horizontal: 5),
-                child: Text("Edit Account", style: TextStyle(fontSize: 18),
+                Divider(height: 0,),
+                ListTile(
+                  leading:Icon(Icons.perm_device_information),
+                  title:Text("About Eppione", style: TextStyle(fontSize: 18)
+                  ),
+                  trailing: Icon(Icons.keyboard_arrow_right) ,
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 180),
-                child: Icon(Icons.keyboard_arrow_right),
-              ),
-            ],
-          ),
-        ),
-        Divider(),
-        Container(
-          margin: EdgeInsets.symmetric(vertical:5.0,),
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left:30,right: 12),
-                child: Icon(Icons.lock_outline),
-              ),
-              Container(
-                child: Text("Change Password", style: TextStyle(fontSize: 18),
+                Divider(height: 0,),
+                ListTile(
+                  leading:Icon(Icons.not_listed_location),
+                  title:Text("FAQ's", style: TextStyle(fontSize: 18),
+                  ),
+                  trailing: Icon(Icons.keyboard_arrow_right) ,
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 130),
-                child: Icon(Icons.keyboard_arrow_right),
-              ),
-            ],
-          ),
-        ),
-        Divider(),
-        Container(
-          margin: EdgeInsets.symmetric(vertical:5.0,),
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left:30,right: 12),
-                child: Icon(Icons.next_week),
-              ),
-              Container(
-                child: Text("My Earnings", style: TextStyle(fontSize: 18),
+                Divider(height: 0,),
+                ListTile(
+                  leading:Icon(Icons.call),
+                  title:Text("Contact Us", style: TextStyle(fontSize: 18)
+                  ),
+                  trailing: Icon(Icons.keyboard_arrow_right) ,
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return MyEarnings();
-                  }
-                  )
-                  );
-                },
-                child: Container(
-                  margin: EdgeInsets.only(left: 180),
-                  child: Icon(Icons.keyboard_arrow_right,),
+                Divider(height: 0,),
+                ListTile(
+                  leading:Icon(Icons.power_settings_new),
+                  title:Text("Logout", style: TextStyle(fontSize: 18)
+                  ),
+                  trailing: Icon(Icons.keyboard_arrow_right) ,
                 ),
-              ),
-            ],
+                Divider(height: 0,),
+              ],
+            ),
           ),
 
-        ),
-        Divider(),
-        Container(
-          margin: EdgeInsets.symmetric(vertical:5.0,),
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left:30,right: 12),
-                child: Icon(Icons.perm_device_information),
-              ),
-              Container(
-                child: Text("About Eppione", style: TextStyle(fontSize: 18),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 160),
-                child: Icon(Icons.keyboard_arrow_right),
-              ),
-            ],
-          ),
-        ),
-        Divider(),
-        Container(
-          margin: EdgeInsets.symmetric(vertical:5.0,),
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left:30,right: 12),
-                child: Icon(Icons.not_listed_location),
-              ),
-              Container(
-                child: Text("FAQ's", style: TextStyle(fontSize: 18),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 238),
-                child: Icon(Icons.keyboard_arrow_right),
-              ),
-            ],
-          ),
-        ),
-        Divider(),
-        Container(
-          margin: EdgeInsets.symmetric( vertical:5.0,),
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left:30,right: 12),
-                child: Icon(Icons.call),
-              ),
-              Container(
-                child: Text("Contact Us", style: TextStyle(fontSize: 18),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 188),
-                child: Icon(Icons.keyboard_arrow_right),
-              ),
-            ],
-          ),
-        ),
-        Divider(),
-        Container(
-          margin: EdgeInsets.symmetric(vertical:5.0,),
-          child: Row(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(left:30,right: 12),
-                child: Icon(Icons.power_settings_new),
-              ),
-              Container(
-                child: Text("Logout", style: TextStyle(fontSize: 18),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 223),
-                child: Icon(Icons.keyboard_arrow_right),
-              ),
-            ],
-          ),
-        ),
-        Divider(),
-
-
-      ],
+        ],
+      ),
     );
   }
 }

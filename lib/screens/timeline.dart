@@ -28,14 +28,73 @@ class BadgeTimelineState extends State<BadgeTimeline> with TickerProviderStateMi
           getTravellerID(),
           Divider(),
           //timeline heading
-          getTimeline(),
-          Padding(
-            padding: EdgeInsets.only(top: 20.0),
-            child: MyTimeLine(),
-          ),
-          MyTimeLine(),
-          MyTimeLine(),
+          getTimelineHeading(),
+          Container(
+            margin: EdgeInsets.all(30.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+               MyTimeLine(),
+                //vertical line
+                VerticalLine(),
+                MyTimeLine(),
+                //vertical line
+                VerticalLine(),
+                MyTimeLine(),
+                //vertical line
+                VerticalLine(),
+                MyTimeLine(),
+                //vertical line
+                VerticalLine(),
+                Row(
+                  children: <Widget>[
+                    Container(
+                      width: 20,
+                      child:Icon(Icons.done,size:15,color: Colors.white),
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          shape: BoxShape.circle),
+                    ),
+                    Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text("Heading text",style: TextStyle(fontSize: 12))
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(left: 150),
+                        child: Text("00:00 am",style: TextStyle(fontSize: 12),)
+                    ),
+                  ],
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 9),
+                  height: 60.0,
+                  width: 2.5,
+                  color: Colors.grey,
+                ),
+                Row(
+                  children: <Widget>[
+                    Container(
+                      width: 20,
+                      child:Icon(Icons.done,size:15,color: Colors.grey),
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          shape: BoxShape.circle),
+                    ),
+                    Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text("Heading text",style: TextStyle(fontSize: 12))
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(left: 150),
+                        child: Text("00:00 am",style: TextStyle(fontSize: 12))
+                    ),
+                  ],
+                ),
 
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -61,9 +120,9 @@ class BadgeTimelineState extends State<BadgeTimeline> with TickerProviderStateMi
     );
   }
 
-  Widget getTimeline() {
+  Widget getTimelineHeading() {
     return Padding(
-      padding: EdgeInsets.only(left: 60.0,top: 20.0,bottom: 20.0),
+      padding: EdgeInsets.only(left: 60.0,top: 15.0),
       child: Text("Track Trip",style: TextStyle(fontSize: 18),
       ),
     );
@@ -73,89 +132,44 @@ class BadgeTimelineState extends State<BadgeTimeline> with TickerProviderStateMi
   void goToLastScreen() {
     Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
   }
+
 }
 
-class getVerticalSeparator extends StatelessWidget{
+class MyTimeLine extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return  Row(
+      children: <Widget>[
+        Container(
+          width: 20,
+          child:Icon(Icons.done,size:15,color: Colors.white),
+          decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              shape: BoxShape.circle),
+        ),
+        Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            child: Text("Heading text",style: TextStyle(fontSize: 12))
+        ),
+        Container(
+            margin: EdgeInsets.only(left: 150),
+            child: Text("00:00 am",style: TextStyle(fontSize: 12),)
+        ),
+      ],
+    );
+  }
+}
+
+class VerticalLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.0,
-      width: 1.0,
-      color: Theme.of(context).primaryColor,
+      margin: EdgeInsets.symmetric(horizontal: 9),
+      height: 60.0,
+      width: 2.5,
+      color: Theme
+          .of(context)
+          .primaryColor,
     );
   }
 }
-
-class MyTimeLine extends StatefulWidget{
-  @override
-  _TimeLineState createState() => _TimeLineState();
-}
-
-class _TimeLineState extends State<MyTimeLine>{
-//list for traveller
-//  List<Widget> _travelStatus=[
-//    Container(
-//      child: ,
-//    )
-//    "Start Trip",
-//    "On My Way",
-//    "Arrived At Location",
-//    "On way to Doctor",
-//
-//  ];
-  @override
-  Widget build(BuildContext context) {
-    return  Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      child: Column(
-        children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                width: 30.0,
-                child: Center(
-                  child: Stack(
-                    children: <Widget>[
-                      Padding(padding: EdgeInsets.only(left: 12.0),
-                        child: getVerticalSeparator(),
-                      ),
-                      Container(
-                        padding: EdgeInsets.only(),
-                        child:Icon(Icons.done,color: Colors.white),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            shape: BoxShape.circle),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(left: 20.0, top: 5.0),
-                          child: Text('Header Text',),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 180.0, top: 5.0),
-                          child: Text('00:00 am',),
-                        ),
-                      ],
-                    )
-
-                  ],
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-}
-

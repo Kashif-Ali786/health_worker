@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp1/screens/schedule_update.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ShiftStart extends StatefulWidget {
@@ -9,6 +8,9 @@ class ShiftStart extends StatefulWidget {
 }
 
 class _ShiftStartState extends State<ShiftStart> {
+
+  TimeOfDay startTimeOfDay;
+  TimeOfDay endTimeOfDay;
 
   CalendarController _calendarController;
   Map<DateTime, List<dynamic>> _events;
@@ -19,31 +21,22 @@ class _ShiftStartState extends State<ShiftStart> {
     _calendarController = CalendarController();
     _events = {};
     _eventController = TextEditingController();
+    startTimeOfDay=TimeOfDay(hour: 00,minute: 00);
+    endTimeOfDay=TimeOfDay(hour: 00,minute: 00);
   }
-
-  int val=0;
-  final Map<int,Widget>TimeFormat=const<int,Widget>{
-    0:Text("AM"),
-    1:Text("PM"),
-
-  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
+
           Container(
-            margin: EdgeInsets.only(top:25.0),
-            child: Image(
-              width: 220,
-              image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Icons8_flat_calendar.svg/1200px-Icons8_flat_calendar.svg.png'),
-            ),
-          ),
-          Container(
-            width: 280,
+              margin: EdgeInsets.only(top:35.0),
+
+              width: 280,
             alignment: Alignment.center,
-              child: Text("Enter your working days and hours",style: TextStyle(fontSize: 22),)
+              child: Text("Select your working days and hours",textAlign: TextAlign.center ,style: TextStyle(fontSize: 22),)
           ),
             Container(
               decoration: BoxDecoration(
@@ -56,54 +49,25 @@ class _ShiftStartState extends State<ShiftStart> {
             ),
 //          Divider(thickness: 6,),
           getTableCalendar(),
-          Container(
-            child: Column(
-              children: <Widget>[
-                Container(
-                    margin: EdgeInsets.all(10.0),
-
-                    child: Text("Shift Start",style: TextStyle(fontWeight: FontWeight.w300),)
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.arrow_back_ios),
-                    ),
-                    Spacer(),
-                    Container(
-                        margin: EdgeInsets.only(bottom:10.0),
-                        child: Text("00:00",style: TextStyle(fontSize: 52),)
-                    ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.arrow_forward_ios),
-                    )
-                  ],
-                ),
-                Container(
-                  child: CupertinoSlidingSegmentedControl(
-                    backgroundColor: Theme.of(context).primaryColor,
-                    thumbColor: Colors.white,
-                    groupValue: val,
-                    onValueChanged: (value){
-                      setState(() {
-                        val=value;
-                      });
-                    },
-                    children:TimeFormat ,
-                  ),
-                )
-
-
-              ],
-            ),
+          Divider(),
+          Column(
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.alarm),
+                title: Text("Shift Start"),
+                trailing: Text(" ${startTimeOfDay.format(context).toUpperCase()}"),
+                onTap: _pickStartTime,
+              ),
+              ListTile(
+                leading: Icon(Icons.alarm),
+                title: Text("Shift End"),
+                trailing: Text(" ${endTimeOfDay.format(context).toUpperCase()}"),
+                onTap: _pickEndTime,
+              ),
+            ],
           ),
           Container(
-              margin: EdgeInsets.all( 30),
+              margin: EdgeInsets.all( 20),
               width: 300,
               child: FloatingActionButton.extended(
                 onPressed: (){
@@ -125,14 +89,14 @@ class _ShiftStartState extends State<ShiftStart> {
 
   Widget getTableCalendar() {
     return TableCalendar(
+      rowHeight: 50,
       events: _events,
-      initialCalendarFormat: CalendarFormat.week,
       calendarStyle: CalendarStyle(
         highlightToday: true,
         highlightSelected: true,
-        holidayStyle: TextStyle(fontSize: 18),
-        weekendStyle: TextStyle(fontSize: 18),
-        weekdayStyle: TextStyle(fontSize: 18),
+        holidayStyle: TextStyle(fontSize: 16),
+        weekendStyle: TextStyle(fontSize: 16),
+        weekdayStyle: TextStyle(fontSize: 16),
         todayColor: Theme.of(context).primaryColor,
         selectedColor: Theme.of(context).primaryColor,
         todayStyle: TextStyle(
@@ -184,4 +148,25 @@ class _ShiftStartState extends State<ShiftStart> {
 //    )
   }
 
+
+  _pickStartTime() async{
+    TimeOfDay startTime=await showTimePicker(
+        context: context, initialTime: TimeOfDay(hour: 00,minute: 00));
+    if(startTime!=null)
+      {
+        setState(() {
+          startTimeOfDay=startTime;
+        });
+      }
+  }
+  _pickEndTime() async{
+    TimeOfDay endTime=await showTimePicker(
+        context: context, initialTime: endTimeOfDay);
+    if(endTime!=null)
+    {
+      setState(() {
+        endTimeOfDay=endTime;
+      });
+    }
+  }
 }

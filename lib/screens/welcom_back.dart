@@ -42,7 +42,7 @@ class WelcomeBack extends StatelessWidget {
                         return Home();
                       }));
                     },
-                    label: Text('Next',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),
+                    label: Text('Next',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                   )),
 
             ],

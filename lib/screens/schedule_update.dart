@@ -1,15 +1,23 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Schedule extends StatelessWidget{
+class ScheduleUpdate extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return SafeArea(
-      child: Container(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey[350],
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Theme.of(context).primaryColor,
+            onPressed: () {},
+          )
+      ),
+      body: Container(
         color: Theme.of(context).primaryColor,
         child: Container(
-            margin: EdgeInsets.symmetric(vertical:80.0,horizontal: 30),
+            margin: EdgeInsets.symmetric(vertical:65.0,horizontal: 30),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
             color: Colors.grey[350],
@@ -17,7 +25,7 @@ class Schedule extends StatelessWidget{
             child: Column(
               children: <Widget>[
                 Container(
-                    margin: EdgeInsets.symmetric(vertical: 25,horizontal: 10),
+                    margin: EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                     child: Text("Schedule Update",
                       style: TextStyle(
                           fontSize: 22,
@@ -282,25 +290,22 @@ class Schedule extends StatelessWidget{
                             "Edit",
                           ),
                         ),
-                      ),                  ],
+                      ),
+                    ],
                   ),
                 ),
                 Divider(color: Colors.black87,thickness: 1.5,),
-
-                GestureDetector(
+                MaterialButton(
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-
+                    margin: EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                     child: Text("Confirm",
                       style: TextStyle(
                           fontSize: 22,
                           decoration: TextDecoration.none,
                           color: Theme.of(context).primaryColor
                       ),
-
                     ),
                   ),
-                  onTap: (){},
                 )
               ],
             ),

@@ -1,16 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutterapp1/screens/past_tab.dart';
-import 'package:flutterapp1/screens/timeline.dart';
-import 'package:flutterapp1/screens/details.dart';
-import 'package:intl/intl.dart';
-import 'dart:ui';
-import 'package:table_calendar/table_calendar.dart';
 import 'account.dart';
 import 'appointment.dart';
-import 'calendars_screen.dart';
-import 'start_shift.dart';
+import 'shift_screen.dart';
 import 'my_earnings.dart';
 
 class Home extends StatefulWidget {
@@ -96,77 +89,6 @@ class _Home extends State<Home> {
 
 }
 
-
-
-class GetListView extends StatefulWidget {
-  @override
-  _GetListViewState createState() => _GetListViewState();
-}
-
-class _GetListViewState extends State<GetListView> {
-
-  TimeOfDay timeOfDay;
-  void initState() {
-    super.initState();
-    timeOfDay=TimeOfDay(hour: 00,minute: 00);
-  }
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView.builder(
-          itemCount: 1,
-          itemBuilder: (context, index) {
-            return Column(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 15.0, right: 15.0, bottom: 15.0),
-                  child: ListTile(
-                      leading: Container(
-                          width: 70,
-                          alignment: Alignment.topLeft,
-                          child: Text("${timeOfDay.format(context).toUpperCase()}")),
-                      subtitle: Container(
-                        padding: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
-                          color: Colors.grey[200],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    "Trip to Lahore",
-                                    style: TextStyle(
-                                        fontSize: 20, color: Colors.black),
-                                  ),
-                                  Text("From: Lahore"),
-                                  Text("To: Karachi")
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                              return Details();
-                            }));
-                      }),
-                ),
-                Divider(),
-              ],
-            );
-          },
-        ));
-  }
-}
 
 
 

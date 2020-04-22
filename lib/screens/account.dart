@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp1/screens/change_password.dart';
+import 'package:flutterapp1/screens/sign_in.dart';
 
 
 class Account extends StatelessWidget {
@@ -67,6 +69,9 @@ class Account extends StatelessWidget {
                   leading:Icon(Icons.lock_outline),
                   title:Text("Change Password", style: TextStyle(fontSize: 18)),
                   trailing: Icon(Icons.keyboard_arrow_right) ,
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ChangePassword();}
+                  )),
                 ),
                 Divider(height: 0,),
                 ListTile(
@@ -95,6 +100,9 @@ class Account extends StatelessWidget {
                   title:Text("Logout", style: TextStyle(fontSize: 18)
                   ),
                   trailing: Icon(Icons.keyboard_arrow_right) ,
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SignIn();}
+                  )),
                 ),
                 Divider(height: 0,),
               ],

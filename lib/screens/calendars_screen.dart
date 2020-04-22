@@ -35,7 +35,7 @@ class _CalendarsState extends State<Calendars> {
               color: Colors.black87
           )
       ),
-      initialCalendarFormat: CalendarFormat.week,
+//      initialCalendarFormat: CalendarFormat.twoWeeks,
       calendarStyle: CalendarStyle(
         weekendStyle: TextStyle(
             color: Colors.black87

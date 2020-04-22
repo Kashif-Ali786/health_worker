@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterapp1/screens/start_shift.dart';
-
+import 'package:flutterapp1/screens/shift_screen.dart';
 
 class PastTab extends StatefulWidget {
   @override
@@ -8,18 +7,17 @@ class PastTab extends StatefulWidget {
 }
 
 class _PastTabState extends State<PastTab> {
-
   DateTime _dateTime;
   // String fomattedDate=DateFormat.yMMMd().format(_dateTime);
   TimeOfDay _timeOfDay;
 
-
   @override
   void initState() {
     super.initState();
-    _dateTime=DateTime.now();
-    _timeOfDay=TimeOfDay.now();
+    _dateTime = DateTime.now();
+    _timeOfDay = TimeOfDay.now();
   }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -36,7 +34,8 @@ class _PastTabState extends State<PastTab> {
                     width: 65,
                     child: CircleAvatar(
                       radius: 40,
-                      backgroundImage: AssetImage("assets/images/icons-lady.png"),
+                      backgroundImage:
+                          AssetImage("assets/images/icons-lady.png"),
                       backgroundColor: Theme.of(context).primaryColor,
                     ),
                   ),
@@ -53,15 +52,41 @@ class _PastTabState extends State<PastTab> {
                               children: <Widget>[
                                 Padding(
                                   padding:
-                                  const EdgeInsets.symmetric(vertical: 5.0),
+                                      const EdgeInsets.symmetric(vertical: 5.0),
                                   child: Text(
                                     "${_dateTime.month}, ${_dateTime.day} | ${_timeOfDay.format(context).toUpperCase()}",
                                     style: TextStyle(
                                         fontSize: 16, color: Colors.black),
                                   ),
                                 ),
-                                Text("From: Lahore"),
-                                Text("To: Karachi"),
+                                Row(
+                                  children: <Widget>[
+                                    Column(
+                                      crossAxisAlignment:CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text("From: ",),
+                                        Text("To: ")
+                                      ],
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                              child: Text(
+                                                "Lahore",
+                                              )),
+//                            Divider(),
+                                          Text("Karachi")
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5.0),
@@ -95,7 +120,7 @@ class _PastTabState extends State<PastTab> {
                   ),
                 ),
               ),
-              onTap: (){
+              onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ShiftStart();
                 }));

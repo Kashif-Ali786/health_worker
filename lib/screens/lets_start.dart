@@ -28,7 +28,7 @@ class LetsStart extends StatelessWidget {
                           return Home();
                         }));
                   },
-                  label: Text('Let\'s Start ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),
+                  label: Text('Let\'s Start ',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
                 )),
 
           ],

@@ -1,5 +1,6 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutterapp1/screens/schedule_update.dart';
+import 'package:flutterapp1/screens/timeline.dart';
 
 import 'details.dart';
 
@@ -91,7 +92,7 @@ class DetailsTab extends StatelessWidget {
               onPressed: (){
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) {
-                      return Schedule();
+                      return BadgeTimeline();
                     }));
               },
               label: Text('Track your trip'),))

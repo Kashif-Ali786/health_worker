@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp1/screens/schedule_update.dart';
 import 'calendars_screen.dart';
 
 class ShiftStart extends StatefulWidget {
@@ -66,10 +67,10 @@ class _ShiftStartState extends State<ShiftStart> {
                 child: FloatingActionButton.extended(
                   onPressed: (){
                     print('continue button');
-//                  Navigator.push(context,
-//                      MaterialPageRoute(builder: (context) {
-//                        return Schedule();
-//                      }));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                        return ScheduleUpdate();
+                      }));
                   },
                   label: Text('Continue'),
                 )

@@ -27,7 +27,6 @@ class NotesTab extends StatelessWidget {
           ),
           child: ListTile(
             title: Text("lorum ipsum",style: TextStyle(fontSize: 20),),
-            trailing: Icon(Icons.do_not_disturb_alt),
           ),
         ),
         Divider(),

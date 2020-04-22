@@ -114,7 +114,7 @@ class _SignInTabState extends State<SignInTab> {
                   'Sign In',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 22),
+                      fontSize: 20),
                 ),
               )),
           MaterialButton(
@@ -211,7 +211,7 @@ class _SignUpTabState extends State<SignUpTab> {
                         'Done',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 24),
+                            fontSize: 20),
                       ),
                     )),
               ],

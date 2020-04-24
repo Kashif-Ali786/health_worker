@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp1/screens/details.dart';
 import 'package:flutterapp1/screens/splash_screen.dart';
 import 'package:flutterapp1/screens/startup_screen.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Scheduling App",
-      home:  Startup(),
+      home:  Details(),
       theme: ThemeData(
        primarySwatch: Colors.teal,
 

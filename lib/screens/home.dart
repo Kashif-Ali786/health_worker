@@ -34,11 +34,11 @@ class _Home extends State<Home> {
                   title: Text("Appointment",)
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.local_library),
+                icon: Icon(Icons.schedule),
                 title: Text("Schedule"),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.euro_symbol),
+                icon: Icon(Icons.attach_money),
                 title: Text("My Earnings"),
               ),
               BottomNavigationBarItem(

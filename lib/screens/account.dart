@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp1/screens/about.dart';
 import 'package:flutterapp1/screens/change_password.dart';
+import 'package:flutterapp1/screens/faqs_screen.dart';
 import 'package:flutterapp1/screens/sign_in.dart';
+
+import 'contact_us.dart';
+import 'edit_account.dart';
 
 
 class Account extends StatelessWidget {
@@ -63,6 +68,10 @@ class Account extends StatelessWidget {
                   leading:Icon(Icons.person_outline) ,
                   title:Text("Edit Account", style: TextStyle(fontSize: 18),),
                   trailing: Icon(Icons.keyboard_arrow_right) ,
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return EditAccount();}
+                  )),
+
                 ),
                 Divider(height: 0,),
                 ListTile(
@@ -78,6 +87,10 @@ class Account extends StatelessWidget {
                   leading:Icon(Icons.perm_device_information),
                   title:Text("About Eppione", style: TextStyle(fontSize: 18)
                   ),
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return About();}
+                  )),
+
                   trailing: Icon(Icons.keyboard_arrow_right) ,
                 ),
                 Divider(height: 0,),
@@ -86,13 +99,19 @@ class Account extends StatelessWidget {
                   title:Text("FAQ's", style: TextStyle(fontSize: 18),
                   ),
                   trailing: Icon(Icons.keyboard_arrow_right) ,
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return FAQs();}
+                  )),
                 ),
                 Divider(height: 0,),
                 ListTile(
                   leading:Icon(Icons.call),
-                  title:Text("Contact Us", style: TextStyle(fontSize: 18)
-                  ),
+                  title:Text("Contact Us", style: TextStyle(fontSize: 18)),
                   trailing: Icon(Icons.keyboard_arrow_right) ,
+                  onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ContactUs();}
+                  )),
+
                 ),
                 Divider(height: 0,),
                 ListTile(

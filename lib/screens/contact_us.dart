@@ -3,35 +3,32 @@ import 'package:flutter/material.dart';
 
 import 'lets_start.dart';
 
-class SignUp extends StatefulWidget {
+class ContactUs extends StatefulWidget {
   @override
-  _SignUpState createState() => _SignUpState();
+  _ContactUsState createState() => _ContactUsState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Contact Us"),
+      ),
       resizeToAvoidBottomInset : false,
 
       body: Container(
         child: Column(
           children: <Widget>[
-            Container(
-                margin: EdgeInsets.only(top: 80,bottom: 30),
-                child: Text(
-                  "Sign Up",
-                  style: TextStyle(fontSize: 38),
-                )),
             Expanded(
               child: Container(
-                margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                margin: EdgeInsets.symmetric(vertical: 100, horizontal: 30),
 
                 child: Column(
                   children: <Widget>[
                     TextField(
                       decoration: InputDecoration(
-                          hintText: 'Fullname',
+                          hintText: 'Email',
                           prefixIcon: Icon(Icons.person_outline)),
                     ),
                     Container(
@@ -46,29 +43,11 @@ class _SignUpState extends State<SignUp> {
                       margin: EdgeInsets.only(top: 10),
                       child: TextField(
                         decoration: InputDecoration(
-                            hintText: 'Email',
-                            prefixIcon: Icon(Icons.email)
-                        ),
+                            hintText: 'Message',
+                            prefixIcon: Icon(Icons.message)),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            hintText: 'Location',
-                            prefixIcon: Icon(Icons.location_on)
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            hintText: 'Password',
-                            prefixIcon: Icon(Icons.lock_outline)),
-                      ),
-                    ),
-                    Spacer(),
+                    SizedBox(height: 50,),
 
                     Container(
                         margin: EdgeInsets.only(bottom: 40),
@@ -78,14 +57,10 @@ class _SignUpState extends State<SignUp> {
                           Theme.of(context).primaryColor,
                           onPressed: () {
                             print('continue button');
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return LetsStart();
-                            }
-                            )
-                            );
+                            Navigator.pop(context);
                           },
                           label: Text(
-                            'Done',
+                            'Send Message',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
@@ -101,3 +76,4 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
+

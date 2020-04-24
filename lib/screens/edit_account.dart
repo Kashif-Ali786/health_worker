@@ -3,26 +3,23 @@ import 'package:flutter/material.dart';
 
 import 'lets_start.dart';
 
-class SignUp extends StatefulWidget {
+class EditAccount extends StatefulWidget {
   @override
-  _SignUpState createState() => _SignUpState();
+  _EditAccountState createState() => _EditAccountState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _EditAccountState extends State<EditAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Edit Account"),
+      ),
       resizeToAvoidBottomInset : false,
 
       body: Container(
         child: Column(
           children: <Widget>[
-            Container(
-                margin: EdgeInsets.only(top: 80,bottom: 30),
-                child: Text(
-                  "Sign Up",
-                  style: TextStyle(fontSize: 38),
-                )),
             Expanded(
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
@@ -78,14 +75,10 @@ class _SignUpState extends State<SignUp> {
                           Theme.of(context).primaryColor,
                           onPressed: () {
                             print('continue button');
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return LetsStart();
-                            }
-                            )
-                            );
+                            Navigator.pop(context);
                           },
                           label: Text(
-                            'Done',
+                            'Update',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),

@@ -37,7 +37,7 @@ class _DetailsState extends State<Details> {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 30),
+              margin: EdgeInsets.only(bottom: 20,top: 30),
               constraints: BoxConstraints.expand(height: 60),
               child: Container(
                 margin: EdgeInsets.only(left: 10,right: 10),
@@ -66,17 +66,15 @@ class _DetailsState extends State<Details> {
               ),
             ),
             Expanded(
-              child: Container(
-                child: TabBarView(
-                  children: <Widget>[
-                    //Details Tab
-                    DetailsTab(),
-                    //Document tab
-                    DocumentTab(),
-                    //Note Tab
-                    NotesTab(),
-                  ],
-                ),
+              child: TabBarView(
+                children: <Widget>[
+                  //Details Tab
+                  DetailsTab(),
+                  //Document tab
+                  DocumentTab(),
+                  //Note Tab
+                  NotesTab(),
+                ],
               ),
             )
           ],

@@ -4,6 +4,7 @@ import 'package:flutterapp1/screens/details.dart';
 import 'package:flutterapp1/screens/splash_screen.dart';
 import 'package:flutterapp1/screens/startup_screen.dart';
 
+
 void main()=>runApp(MyApp());
 
 

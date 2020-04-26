@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 
 import 'lets_start.dart';
+import 'notes_tab.dart';
 
 class AddNotes extends StatefulWidget {
   @override
@@ -12,36 +13,10 @@ class AddNotes extends StatefulWidget {
 }
 
 class _AddNotesState extends State<AddNotes> {
-
-  File imageFile;
-
-  Future<void>_showChoiceDialog(BuildContext context){
-    return showDialog(context: context,builder: (BuildContext context){
-      return AlertDialog(
-        title: Text("Select a Choice!"),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              GestureDetector(
-                child: Text("Gallery"),
-                onTap: _openGallery(),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-              ),
-              GestureDetector(
-                child: Text("Camera"),
-                onTap: _openCamera(),
-              )
-
-            ],
-          ),
-
-        ),
-      );
-    });
-  }
-
+  TextEditingController _textEditingController=TextEditingController();
+   String detail;
+   String title;
+   Notes notes=Notes();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +25,7 @@ class _AddNotesState extends State<AddNotes> {
         actions: <Widget>[
           GestureDetector(
               child: Icon(Icons.attach_file,),
-            onTap: ()=> _showChoiceDialog(context),
+     //       onTap: ()=> _showChoiceDialog(context),
           ),
           SizedBox(width: 50,),
         ],
@@ -67,9 +42,11 @@ class _AddNotesState extends State<AddNotes> {
                 child: Column(
                   children: <Widget>[
                     TextField(
+                      controller: _textEditingController,
                       decoration: InputDecoration(
                           hintText: 'Title',
-                          prefixIcon: Icon(Icons.text_fields)),
+                          prefixIcon: Icon(Icons.text_fields)
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 10),
@@ -91,7 +68,11 @@ class _AddNotesState extends State<AddNotes> {
                           Theme.of(context).primaryColor,
                           onPressed: () {
                             print('continue button');
-                            Navigator.pop(context);
+                            String textToSend = _textEditingController.text;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => NotesTab(text: textToSend,),));
                           },
                           label: Text(
                             'Save',
@@ -110,18 +91,55 @@ class _AddNotesState extends State<AddNotes> {
     );
   }
 
-  _openGallery() async{
-    var picture=await ImagePicker.pickImage(source: ImageSource.gallery);
-    this.setState(() {
-      imageFile=picture;
-    });
 
-  }
+//  File imageFile;
+//  Future<void>_showChoiceDialog(BuildContext context){
+//    return showDialog(context: context,builder: (BuildContext context){
+//      return AlertDialog(
+//        title: Text("Select a Choice!"),
+//        content: SingleChildScrollView(
+//          child: ListBody(
+//            children: <Widget>[
+//              GestureDetector(
+//                child: Text("Gallery"),
+//                onTap: _openGallery(),
+//              ),
+//              Padding(
+//                padding: EdgeInsets.all(8.0),
+//              ),
+//              GestureDetector(
+//                child: Text("Camera"),
+//                onTap: _openCamera(),
+//              )
+//
+//            ],
+//          ),
+//
+//        ),
+//      );
+//    });
+//  }
+//
+//  _openGallery() async{
+//    var picture=await ImagePicker.pickImage(source: ImageSource.gallery);
+//    this.setState(() {
+//      imageFile=picture;
+//    });
+//
+//  }
+//
+//  _openCamera() async{
+//    var picture=await ImagePicker.pickImage(source: ImageSource.camera);
+//    this.setState(() {
+//      imageFile=picture;
+//    });
+//  }
+}
 
-  _openCamera() async{
-    var picture=await ImagePicker.pickImage(source: ImageSource.camera);
-    this.setState(() {
-      imageFile=picture;
-    });
-  }
+class Notes{
+  String taskTitle;
+  String taskDetail;
+  Image taskImage;
+  Notes({this.taskTitle,this.taskDetail});
+
 }

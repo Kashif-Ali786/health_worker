@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Scheduling App",
-      home:  Details(),
+      home:  SplashPage(),
       theme: ThemeData(
        primarySwatch: Colors.teal,
 

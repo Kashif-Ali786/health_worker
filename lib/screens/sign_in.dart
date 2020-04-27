@@ -79,36 +79,29 @@ class _SignInTabState extends State<SignInTab> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
-      child: Column(
+      child: ListView(
         children: <Widget>[
           TextField(
             decoration: InputDecoration(
                 hintText: 'Email',
                 prefixIcon: Icon(Icons.email)),
           ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(top: 10),
-              child: TextField(
-                decoration: InputDecoration(
-                    hintText: 'Password',
-                    prefixIcon: Icon(Icons.lock_outline)),
-              ),
+          Container(
+            margin: EdgeInsets.only(top: 10),
+            child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Password',
+                  prefixIcon: Icon(Icons.lock_outline)),
             ),
           ),
           Container(
-              margin: EdgeInsets.all(20),
+              margin: EdgeInsets.only(top: 30),
               width: 300,
               child: FloatingActionButton.extended(
                 backgroundColor:
                 Theme.of(context).primaryColor,
                 onPressed: () {
-                  print('continue button');
-                  Navigator.push(context,
-                      MaterialPageRoute(
-                          builder: (context) {
-                            return WelcomeBack();
-                          }));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeBack()));
                 },
                 label: Text(
                   'Sign In',
@@ -144,81 +137,69 @@ class SignUpTab extends StatefulWidget {
 class _SignUpTabState extends State<SignUpTab> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-
-            child: Column(
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                      hintText: 'Fullname',
-                      prefixIcon: Icon(Icons.person_outline)),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Phone',
-                        prefixIcon: Icon(Icons.call)),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Email',
-                        prefixIcon: Icon(Icons.email)
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Location',
-                        prefixIcon: Icon(Icons.location_on)
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Password',
-                        prefixIcon: Icon(Icons.lock_outline)),
-                  ),
-                ),
-                Spacer(),
-
-                Container(
-                    margin: EdgeInsets.only(bottom: 40),
-                    width: 400,
-                    child: FloatingActionButton.extended(
-                      backgroundColor:
-                      Theme.of(context).primaryColor,
-                      onPressed: () {
-                        print('continue button');
-                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                          return LetsStart();
-                        }
-                        )
-                        );
-                      },
-                      label: Text(
-                        'Done',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      ),
-                    )),
-              ],
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+      child:SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            TextField(
+              decoration: InputDecoration(
+                  hintText: 'Fullname',
+                  prefixIcon: Icon(Icons.person_outline)),
             ),
-          ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: TextField(
+                decoration: InputDecoration(
+                    hintText: 'Phone',
+                    prefixIcon: Icon(Icons.call)),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: TextField(
+                decoration: InputDecoration(
+                    hintText: 'Email',
+                    prefixIcon: Icon(Icons.email)
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: TextField(
+                decoration: InputDecoration(
+                    hintText: 'Location',
+                    prefixIcon: Icon(Icons.location_on)
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: TextField(
+                decoration: InputDecoration(
+                    hintText: 'Password',
+                    prefixIcon: Icon(Icons.lock_outline)),
+              ),
+            ),
+            Container(
+                margin: EdgeInsets.only(top: 30),
+                width: 400,
+                child: FloatingActionButton.extended(
+                  backgroundColor:
+                  Theme.of(context).primaryColor,
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>LetsStart()));
+                  },
+                  label: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
+                )),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

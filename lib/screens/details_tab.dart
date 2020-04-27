@@ -68,16 +68,10 @@ class DetailsTab extends StatelessWidget {
                   )
                 ],
               ),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context){
-                  return Details();
-                }));
-              }
+
           ),
 
         ),
-
-
         Divider(),
         Container(
           margin:EdgeInsets.only(top: 5),

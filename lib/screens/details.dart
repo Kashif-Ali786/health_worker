@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'details_tab.dart';
@@ -52,9 +53,9 @@ class _DetailsState extends State<Details> {
                   ),
                   unselectedLabelColor: Colors.black87,
                   tabs: <Widget>[
-                    Text('Details',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
-                    Text('Document',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
-                    Text('Notes',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
+                    AutoSizeText('Details',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
+                    AutoSizeText('Document',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
+                    AutoSizeText('Notes',style: TextStyle(fontSize: 18,fontWeight: FontWeight.normal),),
                   ],
                   onTap: (index){
                     setState(() {
@@ -84,7 +85,7 @@ class _DetailsState extends State<Details> {
   }
 
   void moveToLastSreen() {
-    Navigator.pop(context);
+    Navigator.of(context).pop();
   }
 
   getBorderRadius() {

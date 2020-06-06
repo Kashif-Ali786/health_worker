@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp1/screens/timeline.dart';
 
-import 'details.dart';
 
 class DetailsTab extends StatelessWidget {
   @override

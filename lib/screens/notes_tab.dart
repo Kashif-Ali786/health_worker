@@ -4,22 +4,20 @@ import 'package:flutter/material.dart';
 
 import 'add_notes_screen.dart';
 
-//class NotesTab extends StatefulWidget {
-////  final Notes notes;
-////  var taskList=List<Notes>();
-//
-////  NotesTab({Key key, @required this.taskList}) : super(key: key);
-//
-//  @override
-//  _NotesTabState createState() => _NotesTabState();
-//}
-
-class NotesTab extends StatelessWidget {
-
-//  var taskList=List<Notes>();
-  final List<Notes> taskList;
+class NotesTab extends StatefulWidget {
+//  final Notes notes;
+  var taskList=List<Notes>();
 
   NotesTab({Key key, @required this.taskList}) : super(key: key);
+
+  @override
+  _NotesTabState createState() => _NotesTabState();
+}
+
+class _NotesTabState extends State<NotesTab> {
+
+//  var taskList=List<Notes>();
+  List<Notes> taskList;
 
   TextEditingController _titleController=TextEditingController();
   TextEditingController _detailController=TextEditingController();
@@ -28,16 +26,19 @@ class NotesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        getData(),
+        getData(taskList),
         Container(
           alignment: Alignment.bottomRight,
           padding: EdgeInsets.all( 20),
           child: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: ()async {
-              var result=await Navigator.push(context, MaterialPageRoute(builder: (context) => AddNotes()));
-              Scaffold.of(context).showSnackBar(SnackBar(content: Text("${result}"),duration: Duration(seconds: 10),));
-
+              taskList=await Navigator.push(context, MaterialPageRoute(builder: (context) => AddNotes()));
+              setState(() {
+                getData(taskList);
+              });
+              print("REsult =>${taskList[0].taskTitle}");
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text("${taskList[0].taskTitle}"),duration: Duration(seconds: 10),));
 //              createAlertDialog(context).then((onValue){
 //                SnackBar snackbar=SnackBar(content: Text("Note Saved"),);
 //                Scaffold.of(context).showSnackBar(snackbar);
@@ -101,7 +102,7 @@ class NotesTab extends StatelessWidget {
 //    });
 //  }
 
-  Widget getData() {
+  Widget getData(taskList) {
     if(taskList==null) {
       return Text("no data");
     }else {

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'lets_start.dart';
 
 class EditAccount extends StatefulWidget {
   @override

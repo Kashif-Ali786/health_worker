@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp1/screens/reset_password.dart';
-import 'package:flutterapp1/screens/sign_up.dart';
 import 'package:flutterapp1/screens/welcom_back.dart';
 
 import 'lets_start.dart';

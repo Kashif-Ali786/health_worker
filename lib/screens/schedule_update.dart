@@ -296,6 +296,7 @@ class ScheduleUpdate extends StatelessWidget{
                 ),
                 Divider(color: Colors.black87,thickness: 1.5,),
                 MaterialButton(
+                  onPressed: (){},
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                     child: Text("Confirm",

@@ -2,8 +2,6 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'lets_start.dart';
-import 'notes_tab.dart';
 
 class AddNotes extends StatefulWidget {
   @override
@@ -83,7 +81,7 @@ class _AddNotesState extends State<AddNotes> {
 //                            print(note.taskDetail);
 //                          });
                           setState(()=>taskList.add(Notes(taskTitle: _titleController.text,taskDetail: _detailController.text)));
-//                          Navigator.pop(context,NotesTab(taskList: taskList,));
+//                          Navigator.pop(context,Notes(taskTitle: _titleController.text,taskDetail: _detailController.text));
                           Navigator.of(context).pop(taskList);
                           print("Title=>${taskList[0].taskTitle}");
                           print("Detail=>${taskList[0].taskDetail}");
